@@ -318,7 +318,7 @@
     "ms_hub_url": "AI-ModelScope/RLAIF-Nectar",
     "ranking": true
   },
-  "orca_dpo_de" : {
+  "orca_dpo_de": {
     "hf_hub_url": "mayflowergmbh/intel_orca_dpo_pairs_de",
     "ranking": true
   },
@@ -391,5 +391,43 @@
       "prompt": "content"
     },
     "folder": "python"
+  },
+  "Basic_Math": {
+    "file_name": "all_basic.jsonl",
+    "columns": {
+      "prompt": "text"
+    }
+  },
+  "WordProblems_SFT": {
+    "file_name": "All_Word_Problems_Filtered.jsonl",
+    "columns": {
+      "prompt": "question",
+      "response": "answer"
+    }
+  },
+  "WordProblems_Pretrain": {
+    "file_name": "All_Word_Problems_Filtered.jsonl",
+    "columns": {
+      "prompt": "text"
+    }
+  },
+  "MathTest": {
+    "file_name": "Math_test.jsonl",
+    "columns": {
+      "prompt": "Question"
+    }
+  },
+  "Pretrain_Basic": {
+    "hf_hub_url": "MathSymbol/SymbolBasic_1M",
+    "columns": {
+      "prompt": "response"
+    }
+  },
+  "BasicSFT": {
+    "hf_hub_url": "MathSymbol/SymbolBasic_1M",
+    "columns": {
+      "prompt": "Question",
+      "response": "Answer"
+    }
   }
 }

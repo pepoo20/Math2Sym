@@ -773,3 +773,26 @@ _register_template(
     format_user=StringFormatter(slots=["<human>:{{content}}\n<bot>:"]),
     format_separator=EmptyFormatter(slots=["\n"]),
 )
+
+
+_register_template(
+    name="WordProblemMath",
+    format_user=StringFormatter(slots=["Question: {{content}} \n Answer: "]),
+    format_system=StringFormatter(slots=["{{content}}\n"]),
+    format_separator=EmptyFormatter(slots=["\n"]),
+    default_system="You are a Math Teacher.Your goal is to understand a math word problem. Then recognize and distinguish which problem it is and then define the variables (if needed) and formulate the problem as it kind then transform it to Symbolic Form.",
+)
+
+_register_template(
+    name="WordProblemMathPretrain",
+    format_separator=EmptyFormatter(slots=["\n"]),
+    efficient_eos=True,
+    default_system="You are a Math Teacher.Your goal is to understand a math word problem. Then recognize and distinguish which problem it is and then define the variables (if needed) and formulate the problem as it kind then transform it to Symbolic Form.",
+)
+
+_register_template(
+    name="PretrainSFT",
+    format_user=StringFormatter(slots=["Question: {{content}} \n Answer: "]),
+    format_system=StringFormatter(slots=["{{content}}\n"]),
+    format_separator=EmptyFormatter(slots=["\n"]),
+)
