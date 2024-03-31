@@ -418,13 +418,13 @@
     }
   },
   "Pretrain_Basic": {
-    "hf_hub_url": "MathSymbol/SymbolBasic_1M",
+    "hf_hub_url": "MathSymbol/SymbolBasic_1M_v1",
     "columns": {
       "prompt": "response"
     }
   },
   "BasicSFT": {
-    "hf_hub_url": "MathSymbol/SymbolBasic_1M",
+    "hf_hub_url": "MathSymbol/SymbolBasic_1M_v1",
     "columns": {
       "prompt": "Question",
       "response": "Answer"
