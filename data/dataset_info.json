@@ -406,7 +406,7 @@
     }
   },
   "WordProblems_Pretrain": {
-    "file_name": "MathSymbol/Symbol_WordProblem",
+    "hf_hub_url": "MathSymbol/Symbol_WordProblem",
     "columns": {
       "prompt": "text"
     }
