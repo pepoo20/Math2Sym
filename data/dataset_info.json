@@ -395,7 +395,7 @@
   "Basic_Math": {
     "file_name": "all_basic.jsonl",
     "columns": {
-      "prompt": "text"
+      "prompt": "response"
     }
   },
   "WordProblems_SFT": {
@@ -408,7 +408,7 @@
   "WordProblems_Pretrain": {
     "hf_hub_url": "MathSymbol/Symbol_WordProblem",
     "columns": {
-      "prompt": "text"
+      "prompt": "response"
     }
   },
   "MathTest": {
