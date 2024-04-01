@@ -399,14 +399,14 @@
     }
   },
   "WordProblems_SFT": {
-    "file_name": "All_Word_Problems_Filtered.jsonl",
+    "hf_hub_url": "MathSymbol/Symbol_WordProblem",
     "columns": {
       "prompt": "question",
       "response": "answer"
     }
   },
   "WordProblems_Pretrain": {
-    "file_name": "All_Word_Problems_Filtered.jsonl",
+    "file_name": "MathSymbol/Symbol_WordProblem",
     "columns": {
       "prompt": "text"
     }
