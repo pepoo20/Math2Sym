@@ -950,3 +950,12 @@ register_model_group(
     },
     template="atom",
 )
+
+register_model_group(
+    models={
+        "Jamba-12B":{
+            DownloadSource.DEFAULT: "ai21labs/Jamba-v0.1",
+            DownloadSource.MODELSCOPE: "ai21labs/Jamba-v0.1",
+        },
+    }
+)
