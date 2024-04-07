@@ -2,8 +2,7 @@ import pandas as pd
 import re
 import sys
 import argparse
-sys.path.append(r'D:\OneDrive - VNU-HCMUS\Math_LM\Math_LM\solver')
-from solve_main import extract_equation
+from solver import extract_equation
 
 
 
