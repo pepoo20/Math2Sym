@@ -1,10 +1,9 @@
 import sympy
 from sympy import symbols, cos, simplify, trigsimp, factor, solveset, S, Eq, solve, solve_univariate_inequality
 import re
-from solve_function import Solve,Relation
-from utils import Operation, my_igcd, my_ilcm, my_lcm, divisible
-from trigometry import symplify_trigometry
-import time, threading
+from .solve_function import Solve,Relation
+from .utils import Operation, my_igcd, my_ilcm, my_lcm, divisible
+from .trigometry import symplify_trigometry
 import stopit
 Relation = Relation
 Action = ['solve', 'igcd', 'ilcm', 'divisible', 'simplify','lcm']
