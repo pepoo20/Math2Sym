@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Dict, List, Optional, Sequence, Tuple, Union
 from ..extras.logging import get_logger
 from .formatter import EmptyFormatter, FunctionFormatter, StringFormatter, ToolFormatter
 from .utils import Role, infer_max_len
-from ...prompt import IGCD_Word_Prompt, ILCM_Word_Prompt, Word_Problem_Inequalities, Word_Problem_Compound_Inequalities, WordProblem_SystemEquations, Math_Teacher_Prompt
+from prompt import IGCD_Word_Prompt, ILCM_Word_Prompt, Word_Problem_Inequalities, Word_Problem_Compound_Inequalities, WordProblem_SystemEquations, Math_Teacher_Prompt
 
 if TYPE_CHECKING:
     from transformers import PreTrainedTokenizer
