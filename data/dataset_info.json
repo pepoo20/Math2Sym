@@ -429,5 +429,35 @@
       "prompt": "Question",
       "response": "Answer"
     }
+  },
+  "GCD_test": {
+    "file_name": "Greatest_Common_Divisor.jsonl",
+    "columns": {
+      "prompt": "Question"
+    }
+  },
+  "LCM_test": {
+    "file_name": "Least_Common_Multiple.jsonl",
+    "columns": {
+      "prompt": "Question"
+    }
+  },
+  "Inequalities_test": {
+    "file_name": "Inequalities_Equation.jsonl",
+    "columns": {
+      "prompt": "Question"
+    }
+  },
+  "CompoundInequalities_test": {
+    "file_name": "Compound_Inequalities.jsonl",
+    "columns": {
+      "prompt": "Question"
+    }
+  },
+  "SystemLinearEquation_test": {
+    "file_name": "Systems_of_Linear_Equations.jsonl",
+    "columns": {
+      "prompt": "Question"
+    }
   }
 }
