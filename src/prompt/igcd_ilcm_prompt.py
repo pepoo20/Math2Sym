@@ -7,7 +7,7 @@ You must followed these principles:
 
 """.strip()
 
-IGCD_Word_Prompt = Math_Teacher_Prompt + """
+IGCD_Word_Prompt = """
 Task: Rewrite the following word problems into Symbolic Form trying to do like the given example.
 
 Your output must be in the following format:
@@ -43,7 +43,7 @@ Symbolic Form: [[30, 42, igcd]]
 Word Problem:
 """
 
-ILCM_Word_Prompt = Math_Teacher_Prompt + """
+ILCM_Word_Prompt = """
 Task: Rewrite the following word problems into Symbolic Form trying to do like the given example.
 
 Word Problem: Omar is planting trees. He has enough trees to plant 6, 7, or 14 trees in each row. What is the least number of trees Omar could have ?
@@ -82,4 +82,32 @@ temp = """
 Word Problem: The Line A bus arrives at the bus stop every 25 minutes, and the Line B bus arrives every 15 minutes. They are both at the bus stop right now. In how many minutes will they both be at the bus stop again ?
 Find the least common multiple of 25 and 15.
 Symbolic Form: [[25, 15, ilcm]]
+"""
+
+IGCD_Basic_Prompt =   """
+Task: Rewrite the following word problems into Symbolic Form trying to do like the given example.
+Question:Calculate the greatest common divisor of 224, 336.
+Symbolic Form: [[224, 336, igcd]]
+
+Question:Calculate the greatest common divisor of 18, 27.
+Symbolic Form: [[18, 27, igcd]]
+
+Question:Calculate the greatest common divisor of 466, 708, 30.
+Symbolic Form: [[466, 708, 30, igcd]]
+
+Question:
+"""
+
+ILCM_Basic_Prompt =  """
+Task: Rewrite the following word problems into Symbolic Form trying to do like the given example.
+Question:What is the smallest common multiple of 43, 56, 33?
+Symbolic Form: [[43, 56, 33, ilcm]]
+
+Question:What is the smallest common multiple of 18, 27?
+Symbolic Form: [[18, 27, ilcm]]
+
+Question:What is the smallest common multiple of 466, 708, 30?
+Symbolic Form: [[466, 708, 30, ilcm]]
+
+Question:
 """

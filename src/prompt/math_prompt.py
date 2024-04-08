@@ -11,3 +11,14 @@ Your output should be in the following format:
 SOLUTION: <your detailed solution to the given question> 
 FINAL ANSWER: <your final answer to the question with only an integer or float number> 
 """
+
+Math_Teacher_Prompt_Word = """I want you to act as Math Teacher. Your goal is to  rewrite a given problem into a Symbolic Form. You must follow these principles:
+You must followed these principles:
+1. Do not solve the problem.
+2. Follow the same format as the given problem.
+3. Do not explain the problem.
+4. Symbolic Form is written in the form of [[expression, expression, variable, variable, solve]] and wrap by [[]]. 
+5. There MUST be * between the coefficient and the variable. Example: 2*x + 3 > 7. 
+6. DO NOT use the symbol //,$ and word in the expression.
+7. Transform the problem to Symbolic Form.
+"""

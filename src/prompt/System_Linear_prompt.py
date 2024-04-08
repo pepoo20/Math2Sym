@@ -13,7 +13,7 @@ Symbolic Form: <Transformed linear system of equations to symbolic form>
 
 """.strip()
 
-WordProblem_SystemEquations = Math_Teacher_Prompt + """
+WordProblem_SystemEquations =  """
 
 Word Problem: The length of a rectangle is equal to triple the width. Which system of equations can be used to find the dimensions of the rectangle if the perimeter is 86 centimeters?
 Define the variables and formulate the linear system of equations:
@@ -71,7 +71,24 @@ This year, the business expects to pay $4,650 in interest on the two loans. So t
 System of equations: {x + y = 85,000, 0.06*x + 0.045*y = 4,650}
 Symbolic Form: [[x + y - 85,000, 0.06*x + 0.045*y - 4,650, x, y, solve]]
 
+Word Problem:
+
 """
+
+SystemLinear_Basic_prompt = """
+Task: Rewrite the following word problems into Symbolic Form trying to do like the given example.
+Question: Solve the given system of equations by addition:12*x + 13*y = 4\n -y = -3  
+Symbolic Form: [[12*x + 13*y -4, -y + 3, x, y, solve]]
+
+Question: Solve the given system of equations by elimination \n -3*y = 66\n-75*x -52*y = 77 
+Symbolic Form: [[ -3*y -66,-75*x -52*y -77, x, y, solve]]
+
+Question: Solve the given system of equations by substitution: 4*y = -12\n-13*x  = 4 
+Symbolic Form: [[ 4*y + 12,-13*x  -4, x, y, solve]]
+
+Question: 
+"""
+
 
 Temp_Problem = """
 1

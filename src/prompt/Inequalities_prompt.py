@@ -14,7 +14,8 @@ You must followed these principles:
 5. DO NOT use the symbol //,$ and word in the expression.
 """
 
-Word_Problem_Inequalities =Math_Teacher_Prompt+ """
+Word_Problem_Inequalities = """
+Task: Rewrite the following word problems into Symbolic Form trying to do like the given example.
 Your output should be in the following format:
 Word Problem: <Given WordProblem>
 Define the variables and formulate the inequality:<Your created inequality>
@@ -102,7 +103,8 @@ Inequality: 25*d <= 200
 Symbolic Form: [[25*d, <= , 200 , d , solve]]
 
 """
-Word_Problem_Compound_Inequalities = Math_Teacher_Prompt+ """
+Word_Problem_Compound_Inequalities =  """
+Task: Rewrite the following word problems into Symbolic Form trying to do like the given example.
 Your output should be in the following format:
 Word Problem: <Given WordProblem>
 Define the variables and formulate the compound inequality:<Your created compound inequality>
@@ -167,7 +169,7 @@ Let denote the usage in kWh by variable u.
 Compound Inequality: 21.50 <= 15.50 + 0.12*u <= 39.50
 Symbolic Form: [[15.50 + 0.12*u - 21.50 >= 0, 15.50 + 0.12*u - 39.50 <= 0 , u , solve]]
 
-
+Word Problem:
 """.strip()
 
 
@@ -234,4 +236,36 @@ Let denote the side length of the square plot by variable s.
 Compound Inequality: 40 <= 4*s <= 60
 Symbolic Form: [[4*s - 40 >= 0, 4*s - 60 <= 0 , s , solve]]
 
+Word Problem: 
+"""
+
+Inequalities_Basic_Prompt = """
+Task: Rewrite the following inequalities into Symbolic Form trying to do like the given example.
+Question: Inequality: 9*x + 16 <= 3*x  -20
+Symbolic Form: [[9*x + 16, <= , 3*x  -20 , x , solve]]
+
+Question:Inequality: -32*x  -18 < -37*x  -3
+Symbolic Form: [[-32*x  -18, < , -37*x  -3 , x , solve]]
+
+Question:Solve the inequality: -7*y  -32 <= -6*y 
+Symbolic Form : [[-7*y -32, <= , -6*y  , y, solve]]
+
+Question:
+"""
+
+Compound_Inequalities_Basic_Prompt = """
+Task: Rewrite the following compound inequalities into Symbolic Form trying to do like the given example.
+Question:Solve this compound inequalities:  4*y -17 < 19 and -39*y  <= -47 
+Symbolic Form: [[4*y -17  -19 < 0, -39*y  + 47 <= 0, y, solve]]
+
+Question: Solve this compound inequalities:  -18 < 6*z + 18 < 17 
+Symbolic Form: [[6*z + 18 + 18 > 0, 6*z + 18  -17 < 0, z, solve]]
+
+Question: Solve this compound inequalities: 12*y -3 > 9 and 4*y  < 7 
+Symbolic Form: [[12*y -3 -9 > 0, 4*y  -7 < 0, x, solve]]
+
+Question: Solve this compound inequalities: 3 < x -72 < 7 
+Symbolic Form: [[x -72 -3 > 0, x -72 -7 < 0, x, solve]]
+
+Question:
 """

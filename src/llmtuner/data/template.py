@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Dict, List, Optional, Sequence, Tuple, Union
 from ..extras.logging import get_logger
 from .formatter import EmptyFormatter, FunctionFormatter, StringFormatter, ToolFormatter
 from .utils import Role, infer_max_len
-from prompt import IGCD_Word_Prompt, ILCM_Word_Prompt, Word_Problem_Inequalities, Word_Problem_Compound_Inequalities, WordProblem_SystemEquations, Math_Teacher_Prompt
+from prompt import IGCD_Word_Prompt, ILCM_Word_Prompt, Word_Problem_Inequalities, Word_Problem_Compound_Inequalities, WordProblem_SystemEquations, Math_Teacher_Prompt,Math_Teacher_Prompt_Word
 
 if TYPE_CHECKING:
     from transformers import PreTrainedTokenizer
@@ -808,51 +808,11 @@ _register_template(
 )
 
 _register_template(
-    name="WordProblemGCD",
+    name="MathTeacherPromptWord",
     format_user=StringFormatter(slots=["<|im_start|>user\n{{content}}<|im_end|>\n<|im_start|>assistant\n"]),
     format_system=StringFormatter(slots=["<|im_start|>system\n{{content}}<|im_end|>\n"]),
     format_separator=EmptyFormatter(slots=["\n"]),
     stop_words=["<|im_end|>"],
     replace_eos=True,
-    default_system=IGCD_Word_Prompt,
-)
-
-_register_template(
-    name="WordProblemLCM",
-    format_user=StringFormatter(slots=["<|im_start|>user\n{{content}}<|im_end|>\n<|im_start|>assistant\n"]),
-    format_system=StringFormatter(slots=["<|im_start|>system\n{{content}}<|im_end|>\n"]),
-    format_separator=EmptyFormatter(slots=["\n"]),
-    stop_words=["<|im_end|>"],
-    replace_eos=True,
-    default_system=ILCM_Word_Prompt,
-)
-
-_register_template(
-    name="WordProblemInequality",
-    format_user=StringFormatter(slots=["<|im_start|>user\n{{content}}<|im_end|>\n<|im_start|>assistant\n"]),
-    format_system=StringFormatter(slots=["<|im_start|>system\n{{content}}<|im_end|>\n"]),
-    format_separator=EmptyFormatter(slots=["\n"]),
-    stop_words=["<|im_end|>"],
-    replace_eos=True,
-    default_system=Word_Problem_Inequalities,
-)
-
-_register_template(
-    name="WordProblemCompoundInequality",
-    format_user=StringFormatter(slots=["<|im_start|>user\n{{content}}<|im_end|>\n<|im_start|>assistant\n"]),
-    format_system=StringFormatter(slots=["<|im_start|>system\n{{content}}<|im_end|>\n"]),
-    format_separator=EmptyFormatter(slots=["\n"]),
-    stop_words=["<|im_end|>"],
-    replace_eos=True,
-    default_system=Word_Problem_Compound_Inequalities,
-)
-
-_register_template(
-    name="WordProblemSystemOfEquations",
-    format_user=StringFormatter(slots=["<|im_start|>user\n{{content}}<|im_end|>\n<|im_start|>assistant\n"]),
-    format_system=StringFormatter(slots=["<|im_start|>system\n{{content}}<|im_end|>\n"]),
-    format_separator=EmptyFormatter(slots=["\n"]),
-    stop_words=["<|im_end|>"],
-    replace_eos=True,
-    default_system=WordProblem_SystemEquations,
+    default_system=Math_Teacher_Prompt_Word,
 )
