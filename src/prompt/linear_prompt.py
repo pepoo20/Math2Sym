@@ -1,15 +1,11 @@
-Math_Teacher_Prompt = """I want you to act as Math Teacher. Your objective is to rewrite a given equation into a more complex version to make it a bit harder to handle. But the rewritten prompt must be reasonable and must be understood and responded to by humans. After that Simplify equation and transform it to Symbolic Form.
+Math_Teacher_Prompt = """I want you to act as Math Teacher. Your objective is to rewrite a given word problem into a Symbolic Form.
 You must followed these principles:
 1. Do not solve the equation.
-2. Generate a similar but new Word Problem according to the Given Word Problem.
-3. Ensure the new Word Problem only asks for one thing, be reasonable and can be answered with only a number (float or integer). For example, DO NOT ask, 'what is the amount of A, B and C?'
-4. You MUST have the * symbol between the number and the variable. For example, 2*x, 3*y, 4*z etc.
-5. The Symbolic Form ONLY accepts variables and equation. For example, [[2*x, 3*x - 5 , x , solve]]
+2. You MUST have the * symbol between the number and the variable. For example, 2*x, 3*y, 4*z etc.
+3. The Symbolic Form ONLY accepts variables and equation. For example, [[2*x, 3*x - 5 , x , solve]]
 
 """.strip()
 WordProblem = """
-I want you to act as Math Teacher. Your goal is to create high quality math word problems that can be represented by the linear equation to help students learn math. Then transform the word problem to an equation and Symbolic Form.
-
 Word Problem:
 "Seven times the number is 36 less than 10 times the number. Find the number."
 Define the variable and formulate the equation based on the word problem:

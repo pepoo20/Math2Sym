@@ -3,8 +3,8 @@
 {"Question":"Inequality: -2y>=14","Type":"Inequalities Equation","Level":1,"Answer":null,"Source":null,"Symbolic Form":"[[-2*y, >= , 14, y, solve]]","Word Problem":"No"}
 {"Question":"Inequality:-4x +3  <=5","Type":"Inequalities Equation","Level":2,"Answer":null,"Source":null,"Symbolic Form":"[[-4*x+3 , <=, 5, x, solve]]","Word Problem":"No"}
 {"Question":"Solve: -11y + 4 > 15","Type":"Inequalities Equation","Level":2,"Answer":null,"Source":null,"Symbolic Form":"[[-11*y + 4, > , 15, y, solve]]","Word Problem":"No"}
-{"Question":"Solve: (b\/3) <= 4","Type":"Inequalities Equation","Level":2,"Answer":"b<=12","Source":null,"Symbolic Form":"[[b\/3, <= , 4, b, solve]]","Word Problem":"No"}
-{"Question":"Solve the inequality: 3(4x-5) > -6","Type":"Inequalities Equation","Level":2,"Answer":"x>3\/4","Source":null,"Symbolic Form":"[[3*(4*x-5), >, -6,x, solve]]","Word Problem":"No"}
+{"Question":"Solve: (b/3) <= 4","Type":"Inequalities Equation","Level":2,"Answer":"b<=12","Source":null,"Symbolic Form":"[[b/3, <= , 4, b, solve]]","Word Problem":"No"}
+{"Question":"Solve the inequality: 3(4x-5) > -6","Type":"Inequalities Equation","Level":2,"Answer":"x>3/4","Source":null,"Symbolic Form":"[[3*(4*x-5), >, -6,x, solve]]","Word Problem":"No"}
 {"Question":"Solve the inequality: 5x+4 >= 7x + 16","Type":"Inequalities Equation","Level":2,"Answer":"x<=-6","Source":null,"Symbolic Form":"[[5*x+4, >=, 7*x + 16, x, solve]]","Word Problem":"No"}
 {"Question":"Solve: -x-5 <3x-11","Type":"Inequalities Equation","Level":2,"Answer":null,"Source":null,"Symbolic Form":"[[-x-5, <, 3*x-11, x , solve]]","Word Problem":"No"}
 {"Question":"What numbers satisfy the condition: twice a number plus one is greater than negative three?","Type":"Inequalities Equation","Level":2,"Answer":"x > -2","Source":"Elementary Algebra","Symbolic Form":"[[2*x + 1, > , -3, x, solve]]","Word Problem":"Yes"}

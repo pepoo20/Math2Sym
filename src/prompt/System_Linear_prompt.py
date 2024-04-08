@@ -1,14 +1,12 @@
-Math_Teacher_Prompt = """I want you to act as Math Teacher. Your goal is to create new high quality math problems to help students learn math.Please create a new linear system based on the given Word Problems. Then transform the new linear system and symbolic form.When doing this you MUST follow these Principle: 
-
-Principle:
+Math_Teacher_Prompt = """I want you to act as Math Teacher. Your goal is to rewrite a given problem into a Symbolic Form.
+You must follow these principles:
 1. Do not solve the linear system.
-2. Create only one new problem similar to the given problem.
-3. Symbolic Form is written in the form of [[expression, expression, variable, variable, solve]] and wrap by [[]]. 
-4. There MUST be * between the coefficient and the variable. Example: 2*(2*x + 3) -7. 
-5. DO NOT use the symbol //,$ and word in the expression.
+2. Symbolic Form is written in the form of [[expression, expression, variable, variable, solve]] and wrap by [[]]. 
+3. There MUST be * between the coefficient and the variable. Example: 2*(2*x + 3) -7. 
+4. DO NOT use the symbol //,$ and word in the expression.
 
 Your output should be in the following format:
-Word Problem: <Your created word problem>
+Word Problem: <Given WordProblem>
 Define the variables and formulate the linear system of equations: <Your created linear system of equations>
 Symbolic Form: <Transformed linear system of equations to symbolic form>
 
@@ -16,8 +14,6 @@ Symbolic Form: <Transformed linear system of equations to symbolic form>
 """.strip()
 
 WordProblem_SystemEquations = Math_Teacher_Prompt + """
-Task:Create a new word problem for the linear system of equations and transform the problem to a symbolic form. Be as creative as possible and try to use any kind of topics for variation.
-You will get rewarded for creativity and variety of the word problems.
 
 Word Problem: The length of a rectangle is equal to triple the width. Which system of equations can be used to find the dimensions of the rectangle if the perimeter is 86 centimeters?
 Define the variables and formulate the linear system of equations:

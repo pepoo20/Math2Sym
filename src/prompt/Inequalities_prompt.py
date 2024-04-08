@@ -6,11 +6,9 @@
 # 4. There MUST be * between the coefficient and the variable. Example: 2*x + 3 > 7.
 # """.strip()
 
-Math_Teacher_Prompt = """I want you to act as Math Teacher. Your goal is to create high quality math problems to help students learn math.You will be given a math question. Please create a new question based on the Given Problems and following principles. Then transform the new question to Symbolic Form.Symbolic Form elements only include the equation, the inequality symbol, the constant, the variable, and the solve command.
-
+Math_Teacher_Prompt = """I want you to act as Math Teacher. Your goal is to rewrite a given problem into a Symbolic Form.
 You must followed these principles:
 1. Do not solve the problem. 
-2. Create only one new problem similar to the given problem.
 3. Symbolic Form is written in the form of [[expression, expression, variable, variable, solve]] and wrap by [[]]. 
 4. There MUST be * between the coefficient and the variable. Example: 2*x + 3 > 7. 
 5. DO NOT use the symbol //,$ and word in the expression.
@@ -18,12 +16,10 @@ You must followed these principles:
 
 Word_Problem_Inequalities =Math_Teacher_Prompt+ """
 Your output should be in the following format:
-Word Problem: <Your created word problem>
+Word Problem: <Given WordProblem>
 Define the variables and formulate the inequality:<Your created inequality>
 Symbolic Form: <Transformed inequality to Symbolic Form>
 
-Task : Create a new word problem and transform it to an inequality and Symbolic Form.Try to be creative as possible and use ONLY one variable in the word problem.
-You will get rewarded for reasonable and variety of the word problem. 
 
 Word Problem: What numbers satisfy the condition: nine less than negative four times a number is strictly greater than negative one?
 Define the variables and formulate the inequality:
@@ -108,12 +104,10 @@ Symbolic Form: [[25*d, <= , 200 , d , solve]]
 """
 Word_Problem_Compound_Inequalities = Math_Teacher_Prompt+ """
 Your output should be in the following format:
-Word Problem: <Your created word problem>
+Word Problem: <Given WordProblem>
 Define the variables and formulate the compound inequality:<Your created compound inequality>
 Symbolic Form: <Transformed compound inequality to Symbolic Form>
 
-Task : Create a new word problem and transform it to an Compound inequality and Symbolic Form.Try to be creative as possible and use ONLY one variable in the word problem.
-You will get rewarded for reasonable and variety of the word problem. 
 
 Word Problem: Mia is a baker who wants to make a profit of at least $200 but no more than $300 on a large order of cupcakes for a wedding. She has already spent $150 on ingredients and the decorations. Each cupcake she sells will bring in a profit of $2. How many cupcakes does Mia need to sell to make her desired profit?
 Define the variables and formulate the compound inequality:

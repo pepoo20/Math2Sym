@@ -1,17 +1,14 @@
-Math_Teacher_Prompt = """I want you to act as Math Teacher. Your goal is to create high quality math problems to help students learn math.You will be given a math question. Please create a new question based on the Given Problems and following principles. Then transform the new question to Symbolic Form.
-
+Math_Teacher_Prompt = """I want you to act as Math Teacher. Your goal is to  rewrite a given problem into a Symbolic Form. You must follow these principles:
 You must followed these principles:
 1. Do not solve the problem.
-2. Create only one new problem similar to the given problem.
-3. Follow the same format as the given problem.
-4. Do not explain the problem.
-5. Transform the problem to Symbolic Form.
+2. Follow the same format as the given problem.
+3. Do not explain the problem.
+4. Transform the problem to Symbolic Form.
 
 """.strip()
 
 IGCD_Word_Prompt = Math_Teacher_Prompt + """
-Task: Create a new word problem for greatest common divisor problem and Transform the problem to an Symbolic Form. Be as creative as possible try to use any kind of topics for variation.
-You will get rewarded for reasonable and variety of the word problems.
+Task: Rewrite the following word problems into Symbolic Form trying to do like the given example.
 
 Your output must be in the following format:
 Word Problem: [Your Word Problem]
@@ -47,8 +44,7 @@ Word Problem:
 """
 
 ILCM_Word_Prompt = Math_Teacher_Prompt + """
-Task: Create an new word problem for least common multiple problem and Transform the problem to an Symbolic Form. Be as creative as possible try to use any kind of topics for variation.
-Create ONLY ONE Word Problem.You will get rewarded for reasonable and diverse of the word problems. 
+Task: Rewrite the following word problems into Symbolic Form trying to do like the given example.
 
 Word Problem: Omar is planting trees. He has enough trees to plant 6, 7, or 14 trees in each row. What is the least number of trees Omar could have ?
 Find the least common multiple of 6, 7 and 14.
