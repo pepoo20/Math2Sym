@@ -14,6 +14,17 @@ Symbolic Form: <Transformed linear system of equations to symbolic form>
 """.strip()
 
 WordProblem_SystemEquations =  """
+I want you to act as Math Teacher. Your goal is to rewrite a given problem into a Symbolic Form.
+You must follow these principles:
+1. Do not solve the linear system.
+2. Symbolic Form is written in the form of [[expression, expression, variable, variable, solve]] and wrap by [[]]. 
+3. There MUST be * between the coefficient and the variable. Example: 2*(2*x + 3) -7. 
+4. DO NOT use the symbol //,$ and word in the expression.
+
+Your output should be in the following format:
+Word Problem: <Given WordProblem>
+Define the variables and formulate the linear system of equations: <Your created linear system of equations>
+Symbolic Form: <Transformed linear system of equations to symbolic form>
 
 Word Problem: The length of a rectangle is equal to triple the width. Which system of equations can be used to find the dimensions of the rectangle if the perimeter is 86 centimeters?
 Define the variables and formulate the linear system of equations:
@@ -23,13 +34,13 @@ The perimeter of the rectangle is 86 centimeters. So the equation is 2*x + 2*y =
 System of equations: {x = 3*y, 2*x + 2*y = 86} 
 Symbolic Form: [[x - 3*y, 2*x + 2*y - 86, x, y, solve]]
 
-Word Problem: Emma and Liam are saving money. Emma starts with $80 and saves $10 per week. Liam starts with $120 and saves $6 per week. After how many weeks will they have the same amount of money?
+Word Problem:  Two numbers have a sum of 50. One number is 10 more than the other. What are the two numbers?
 Define the variables and formulate the linear system of equations:
-Let variable x represent the number of weeks to have the same amount of money as variable y represent the amount of money. 
-The amount of money Emma starts with is $80. So the equation is 80 + 10*x = y. 
-The amount of money Liam starts with is $120. So the equation is 120 + 6*x = y. 
-System of equations: {80 + 10*x = y, 120 + 6*x = y} 
-Symbolic Form: [[80 + 10*x - y, 120 + 6*x - y, x, y, solve]]
+Let variable x represent the first number and variable y represent the second number.
+The sum of the two numbers is 50. So the equation is x + y = 50.
+One number is 10 more than the other. So the equation is x - y = 10.
+System of equations: {x + y = 50, x - y = 10}
+Symbolic Form: [[x + y - 50, x - y - 10, x, y, solve]]
 
 Word Problem:  At the end of the 2000 NBA regular season, the Houston comets had 22 more victories than losses. The number of victories they had was three less than six time the number of losses. How many regular season games did the Houston comets play during the 2000 NBA season?
 Define the variables and formulate the linear system of equations:
@@ -47,13 +58,15 @@ The total number of legs is 90. So the equation is 2*x + 4*y = 90.
 System of equations: {x + y = 30, 2*x + 4*y = 90}
 Symbolic Form: [[x + y - 30, 2*x + 4*y - 90, x, y, solve]]
 
-Word Problem:The price, e, of an entertainment system at Extreme Electronics is $220 less than twice the price, u, of the same system at Ultra Electronics. The difference in price between the system at Extreme Electronics and Ultra Electronics is $175. What is the price of the system at each store?
+Word Problem: A store sells oranges and apples. Oranges cost $1.00 each and apples cost $2.00 each. In the first sale of the day, 15 fruits were sold in total, and the price was $25. How many of each type of frust was sold?
 Define the variables and formulate the linear system of equations:
-Let variable x represent the price of the system at Extreme Electronics and variable y represent the price of the system at Ultra Electronics.
-The price, e, of an entertainment system at Extreme Electronics is $220 less than twice the price, u, of the same system at Ultra Electronics. So the equation is x = 2*y - 220.
-The difference in price between the system at Extreme Electronics and Ultra Electronics is $175. So the equation is x - y = 175.
-System of equations: {x = 2*y - 220, x - y = 175}
-Symbolic Form: [[x - 2*y + 220, x - y - 175, x, y, solve]]
+Let variable x represent the number of oranges sold and variable y represent the number of apples sold.
+"Oranges cost $1.00 each" so the cost of x oranges is 1*x.
+"Apples cost $2.00 each" so the cost of y apples is 2*y.
+The total cost of the fruits sold is $25.00. So the equation is 1*x + 2*y = 25.
+The total number of fruits sold is 15. So the equation is x + y = 15.
+System of equations: {1*x + 2*y = 25, x + y = 15}
+Symbolic Form: [[1*x + 2*y - 25, x + y - 15, x, y, solve]] 
 
 Word Problem: The Rocket Coaster has 15 cars, some that hold 4 people and some that hold 6 people.There is room for 72 people. How many 4-person cars and how many 6-person cars are there?
 Define the variables and formulate the linear system of equations:
@@ -76,6 +89,18 @@ Word Problem:
 """
 
 SystemLinear_Basic_prompt = """
+I want you to act as Math Teacher. Your goal is to rewrite a given problem into a Symbolic Form.
+You must follow these principles:
+1. Do not solve the linear system.
+2. Symbolic Form is written in the form of [[expression, expression, variable, variable, solve]] and wrap by [[]]. 
+3. There MUST be * between the coefficient and the variable. Example: 2*(2*x + 3) -7. 
+4. DO NOT use the symbol //,$ and word in the expression.
+
+Your output should be in the following format:
+Word Problem: <Given WordProblem>
+Define the variables and formulate the linear system of equations: <Your created linear system of equations>
+Symbolic Form: <Transformed linear system of equations to symbolic form>
+
 Task: Rewrite the following word problems into Symbolic Form trying to do like the given example.
 Question: Solve the given system of equations by addition:12*x + 13*y = 4\n -y = -3  
 Symbolic Form: [[12*x + 13*y -4, -y + 3, x, y, solve]]
@@ -86,7 +111,11 @@ Symbolic Form: [[ -3*y -66,-75*x -52*y -77, x, y, solve]]
 Question: Solve the given system of equations by substitution: 4*y = -12\n-13*x  = 4 
 Symbolic Form: [[ 4*y + 12,-13*x  -4, x, y, solve]]
 
-Question: 
+Question: Solve the given system of equations by addition: 9*y = -3\n-5*x + 6*y = 13  
+Symbolic Form: [[ 9*y + 3,-5*x + 6*y -13, x, y, solve]]
+
+Question: Solve the given system of equations :-8*x -17*y = 0\n-4*x -8*y = 8  
+Symbolic Form: [[-8*x -17*y - 0,-4*x -8*y -8, x, y, solve]]
 """
 
 
