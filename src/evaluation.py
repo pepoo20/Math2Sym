@@ -3,7 +3,7 @@ import re
 import sys
 import argparse
 from solver import extract_equation
-
+import sympy
 
 
 def find_symbolic_form(response):
@@ -51,8 +51,10 @@ def preprocess_result_TypeAnd(result):
 def compare_result_TypeAnd(result1, result2):
     return preprocess_result_TypeAnd(result1) == preprocess_result_TypeAnd(result2)
 def compare_values_dict(dict1, dict2):
-    array_dict1 = list(dict1.values()).sort()
-    array_dict2 = list(dict2.values()).sort()
+    array_dict1 = list(dict1.values())
+    array_dict2 = list(dict2.values())
+    array_dict1.sort()
+    array_dict2.sort()
     return array_dict1 == array_dict2
 def compareResult(result1, result2):
     if type(result1) == dict and type(result2) == dict:
