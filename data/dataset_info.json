@@ -430,6 +430,13 @@
       "response": "Answer"
     }
   },
+  "BasicSFT_500kTo1M": {
+    "hf_hub_url": "MathSymbol/SymbolBasic_500kTo1M",
+    "columns": {
+      "prompt": "Question",
+      "response": "Answer"
+    }
+  },
   "GCD_test": {
     "file_name": "Greatest_Common_Divisor.jsonl",
     "columns": {
