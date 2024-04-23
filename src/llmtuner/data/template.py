@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, Dict, List, Optional, Sequence, Tuple, Union
 from ..extras.logging import get_logger
 from .formatter import EmptyFormatter, FunctionFormatter, StringFormatter, ToolFormatter
 from .utils import Role, infer_max_len
+from prompt import IGCD_Word_Prompt, ILCM_Word_Prompt, Word_Problem_Inequalities, Word_Problem_Compound_Inequalities, WordProblem_SystemEquations, Math_Teacher_Prompt,Math_Teacher_Prompt_Word
 
 
 if TYPE_CHECKING:
@@ -826,4 +827,46 @@ _register_template(
     name="ziya",
     format_user=StringFormatter(slots=["<human>:{{content}}\n<bot>:"]),
     format_separator=EmptyFormatter(slots=["\n"]),
+)
+
+_register_template(
+    name="WordProblemMath",
+    format_user=StringFormatter(slots=["Question: {{content}} \n Answer: "]),
+    format_system=StringFormatter(slots=["{{content}}\n"]),
+    format_separator=EmptyFormatter(slots=["\n"]),
+    default_system="You are a Math Teacher.Your goal is to understand a math word problem. Then recognize and distinguish which problem it is and then define the variables (if needed) and formulate the problem as it kind then transform it to Symbolic Form.",
+)
+
+_register_template(
+    name="WordProblemMathPretrain",
+    format_separator=EmptyFormatter(slots=["\n"]),
+    efficient_eos=True,
+    default_system="You are a Math Teacher.Your goal is to understand a math word problem. Then recognize and distinguish which problem it is and then define the variables (if needed) and formulate the problem as it kind then transform it to Symbolic Form.",
+)
+
+_register_template(
+    name="PretrainSFT",
+    format_user=StringFormatter(slots=["Question: {{content}} \n Answer: "]),
+    format_system=StringFormatter(slots=["{{content}}\n"]),
+    format_separator=EmptyFormatter(slots=["\n"]),
+)
+
+_register_template(
+    name="MathTeacherPrompt",
+    format_user=StringFormatter(slots=["<|im_start|>user\n{{content}}<|im_end|>\n<|im_start|>assistant\n"]),
+    format_system=StringFormatter(slots=["<|im_start|>system\n{{content}}<|im_end|>\n"]),
+    format_separator=EmptyFormatter(slots=["\n"]),
+    stop_words=["<|im_end|>"],
+    replace_eos=True,
+    default_system=Math_Teacher_Prompt,
+)
+
+_register_template(
+    name="MathTeacherPromptWord",
+    format_user=StringFormatter(slots=["<|im_start|>user\n{{content}}<|im_end|>\n<|im_start|>assistant\n"]),
+    format_system=StringFormatter(slots=["<|im_start|>system\n{{content}}<|im_end|>\n"]),
+    format_separator=EmptyFormatter(slots=["\n"]),
+    stop_words=["<|im_end|>"],
+    replace_eos=True,
+    default_system=Math_Teacher_Prompt_Word,
 )
