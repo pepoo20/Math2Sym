@@ -10,6 +10,7 @@ git clone https://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@github.com/pepoo20/Sy
 cd Symbol-Math
 ls
 pip install -q .
+pip install -q galore-torch wandb tiktoken datasets==2.17.1 flash-attn
 ```
 
 ## Reproduce
@@ -30,20 +31,21 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --overwrite_output_dir \
     --cutoff_len 1024 \
     --preprocessing_num_workers 32 \
-    --per_device_train_batch_size 2 \
-    --per_device_eval_batch_size 2 \
+    --per_device_train_batch_size 1 \
+    --per_device_eval_batch_size 1 \
     --gradient_accumulation_steps 1 \
     --lr_scheduler_type cosine \
     --logging_steps 25 \
     --warmup_steps 2000 \
     --optim adamw_8bit \
-    --evaluation_strategy epoch \
+    --evaluation_strategy steps \
+    --eval_steps 2500 \
     --save_strategy epoch \
     --load_best_model_at_end \
     --learning_rate 5e-5 \
     --num_train_epochs 1.0 \
     --val_size 0.002 \
-    --report_to none \
+    --report_to wandb \
     --pure_bf16 \
     --use_galore \
     --galore_layerwise \
@@ -72,19 +74,19 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --overwrite_output_dir \
     --cutoff_len 1024 \
     --preprocessing_num_workers 32 \
-    --per_device_train_batch_size 2 \
-    --per_device_eval_batch_size 2 \
+    --per_device_train_batch_size 1 \
+    --per_device_eval_batch_size 1 \
     --gradient_accumulation_steps 1 \
     --lr_scheduler_type cosine \
     --logging_steps 20 \
     --warmup_steps 2500 \
     --evaluation_strategy steps \
-    --eval_steps 1000 \
+    --eval_steps 2500 \
     --save_strategy steps \
-    --save_steps 5000 \
+    --save_steps 10000 \
     --learning_rate 5e-5 \
     --num_train_epochs 1.0 \
-    --max_samples 100000 \
+    --max_samples 1000000 \
     --val_size 0.02 \
     --pure_bf16 \
     --use_galore \
