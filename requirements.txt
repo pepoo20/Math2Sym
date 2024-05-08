@@ -1,7 +1,11 @@
 torch>=1.13.1
 transformers>=4.37.2
-datasets>=2.14.3
+datasets==2.17.1
 accelerate>=0.27.2
+wandb
+flash-attn
+galore-torch
+tiktoken
 peft>=0.10.0
 trl>=0.8.1
 gradio>=4.0.0
