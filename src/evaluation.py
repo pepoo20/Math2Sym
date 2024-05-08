@@ -45,6 +45,8 @@ def preprocess_result_TypeAnd(result):
                 mapping[variable] = replacements[-1]
     
     # Use regular expressions to replace variables/strings with their corresponding replacements
+    if not mapping:
+        return result
     preprocessed_result = re.sub(r'\b(' + '|'.join(mapping.keys()) + r')\b', lambda m: mapping[m.group()], result)
     
     return preprocessed_result
