@@ -6,8 +6,8 @@
 
 ## Install
 ```bash
-git clone https://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@github.com/pepoo20/LLaMA-Factory.git
-cd LLaMA-Factory
+git clone https://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@github.com/pepoo20/Symbol-Math.git
+cd Symbol-Math
 ls
 pip install -q .
 ```
