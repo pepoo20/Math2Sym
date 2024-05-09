@@ -55,7 +55,11 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --load_best_model_at_end True \
     --plot_loss True 
 ```
-
+Merge Lora with model
+```bash
+python src/merge_peft.py --base_model=meta-llama/Llama-2-7b-hf --peft_model=save/qlora-out --output_dir=qlora-merge
+```
+## Dat
 ### SFT
 ```bash
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
@@ -107,7 +111,7 @@ SFT:
 
 </details>
 
-## Data
+a
 ### Pretrain
 
 | Dataset | Size | Description | Link |
