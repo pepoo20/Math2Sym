@@ -59,7 +59,7 @@ Merge Lora with model
 ```bash
 python src/merge_peft.py --base_model=meta-llama/Llama-2-7b-hf --peft_model=save/qlora-out --output_dir=qlora-merge
 ```
-## Dat
+
 ### SFT
 ```bash
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
@@ -111,7 +111,7 @@ SFT:
 
 </details>
 
-a
+## Data
 ### Pretrain
 
 | Dataset | Size | Description | Link |
