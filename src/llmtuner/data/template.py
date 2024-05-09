@@ -956,7 +956,7 @@ _register_template(
     format_user=StringFormatter(
         slots=[
             (
-                "<|start_header_id|>user<|end_header_id|>\n\n{{content}}<|eot_id|>"
+                "<|start_header_id|>user<|end_header_id|>\n\nQuestion: {{content}}\n Answer:<|eot_id|>"
                 "<|start_header_id|>assistant<|end_header_id|>\n\n"
             )
         ]

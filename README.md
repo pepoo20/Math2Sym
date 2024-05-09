@@ -18,92 +18,90 @@ pip install -q galore-torch wandb tiktoken datasets==2.17.1 flash-attn
 ```bash
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --stage pt \
-    --do_train \
+    --do_train True \
     --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct \
-    --finetuning_type full \
-    --template llama3_empty \
-    --dataset_dir data \
-    --max_samples 1000000 \
-    --dataset Pretrain_Basic \
+    --finetuning_type lora \
+    --template empty \
     --flash_attn True \
-    --packing True \
-    --output_dir saves/LLama8b/pretrain \
-    --overwrite_output_dir \
+    --dataset_dir data \
+    --dataset Pretrain_Basic \
     --cutoff_len 1024 \
-    --preprocessing_num_workers 32 \
-    --per_device_train_batch_size 1 \
-    --per_device_eval_batch_size 1 \
-    --gradient_accumulation_steps 1 \
-    --lr_scheduler_type cosine \
-    --logging_steps 25 \
-    --warmup_steps 2000 \
-    --optim adamw_8bit \
-    --evaluation_strategy steps \
-    --eval_steps 2500 \
-    --save_strategy epoch \
-    --load_best_model_at_end \
-    --learning_rate 5e-5 \
+    --learning_rate 5e-05 \
     --num_train_epochs 1.0 \
-    --val_size 0.002 \
+    --max_samples 1000000 \
+    --preprocessing_num_workers 16 \
+    --per_device_train_batch_size 2 \
+    --gradient_accumulation_steps 8 \
+    --lr_scheduler_type cosine \
+    --max_grad_norm 1.0 \
+    --logging_steps 10 \
+    --save_steps 1000 \
+    --save_total_limit 3 \
+    --warmup_steps 500 \
+    --optim adamw_8bit \
+    --packing True \
     --report_to wandb \
-    --pure_bf16 \
-    --use_galore \
-    --galore_layerwise \
-    --galore_target mlp,self_attn \
-    --galore_rank 128 \
-    --galore_scale 2.0 \
-    --load_best_model_at_end \
-    --plot_loss True
+    --overwrite_output_dir \
+    --output_dir saves/LLaMA3-8B-Chat/lora/ \
+    --bf16 True \
+    --lora_rank 16 \
+    --lora_alpha 16 \
+    --lora_dropout 0 \
+    --lora_target q_proj,v_proj \
+    --val_size 0.02 \
+    --evaluation_strategy steps \
+    --eval_steps 1000 \
+    --per_device_eval_batch_size 2 \
+    --load_best_model_at_end True \
+    --plot_loss True 
 ```
 
 ### SFT
 ```bash
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --stage sft \
-    --do_train \
-    --model_name_or_path saves/LLama8b/pretrain \
-    --dataset_dir data \
-    --dataset WordProblems_SFT \
+    --do_train True \
+    --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct \
+    --finetuning_type lora \
     --template llama3_Math \
-    --cutoff_len 1024 \
-    --finetuning_type full \
-    --packing True \
     --flash_attn True \
-    --optim adamw_8bit \
-    --output_dir saves/LLama8b/SFT \
-    --overwrite_output_dir \
+    --dataset_dir data \
+    --dataset WordProblem_SFT_LLama \
     --cutoff_len 1024 \
-    --preprocessing_num_workers 32 \
-    --per_device_train_batch_size 1 \
-    --per_device_eval_batch_size 1 \
-    --gradient_accumulation_steps 1 \
-    --lr_scheduler_type cosine \
-    --logging_steps 20 \
-    --warmup_steps 2500 \
-    --evaluation_strategy steps \
-    --eval_steps 2500 \
-    --save_strategy steps \
-    --save_steps 10000 \
-    --learning_rate 5e-5 \
-    --num_train_epochs 1.0 \
+    --learning_rate 5e-05 \
+    --num_train_epochs 2.0 \
     --max_samples 1000000 \
-    --val_size 0.02 \
-    --pure_bf16 \
-    --use_galore \
+    --preprocessing_num_workers 16 \
+    --per_device_train_batch_size 2 \
+    --gradient_accumulation_steps 8 \
+    --lr_scheduler_type cosine \
+    --max_grad_norm 1.0 \
+    --logging_steps 10 \
+    --save_steps 250 \
+    --save_total_limit 2 \
+    --warmup_steps 500 \
+    --optim adamw_8bit \
+    --packing True \
     --report_to wandb \
-    --galore_layerwise \
-    --galore_target mlp,self_attn \
-    --galore_rank 128 \
-    --galore_scale 2.0 \
-    --plot_loss True
+    --overwrite_output_dir \
+    --output_dir saves/LLaMA3-8B-Chat/lora_template/ \
+    --bf16 True \
+    --lora_rank 16 \
+    --lora_alpha 16 \
+    --lora_dropout 0 \
+    --lora_target q_proj,v_proj \
+    --val_size 0.02 \
+    --evaluation_strategy steps \
+    --eval_steps 250 \
+    --per_device_eval_batch_size 2 \
+    --load_best_model_at_end True \
+    --plot_loss True 
 ```
 
 <details>
 For other models not llama3, change the `--template` to the corresponding template name.
-
 Pretrain:  
 - empty
-
 SFT:  
 - WordProblemMath
 
