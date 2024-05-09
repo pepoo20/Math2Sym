@@ -421,6 +421,13 @@
       "response": "answer"
     }
   },
+  "WordProblem_SFT_LLama": {
+    "hf_hub_url": "MathSymbol/Symbol_WordProblem_LLama",
+    "columns": {
+      "prompt": "question",
+      "response": "answer"
+    }
+  },
   "WordProblems_Pretrain": {
     "hf_hub_url": "MathSymbol/Symbol_WordProblem",
     "columns": {
