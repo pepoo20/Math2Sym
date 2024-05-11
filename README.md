@@ -67,7 +67,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --do_train True \
     --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct \
     --finetuning_type lora \
-    --template llama3_Math \
+    --template WordProblemMath \
     --flash_attn True \
     --dataset_dir data \
     --dataset WordProblem_SFT_LLama \
@@ -102,14 +102,50 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --plot_loss True 
 ```
 
-<details>
-For other models not llama3, change the `--template` to the corresponding template name.
-Pretrain:  
-- empty
-SFT:  
-- WordProblemMath
-
-</details>
+## Accelerate Lora distributed 4 GPUs
+```bash
+CUDA_VISIBLE_DEVICES=0,1,2,3 accelerate launch \
+    --config_file examples/accelerate/single_config.yaml \
+    -- src/train_bash.py \
+    --stage sft \
+    --do_train \
+    --ddp_timeout 180000000 \
+    --model_name_or_path saves/Orca/merge_unload \
+    --finetuning_type lora \
+    --flash_attn True \
+    --dataset WordProblems_SFT \
+    --dataset_dir data \
+    --template WordProblemMath \
+    --learning_rate 5e-05 \
+    --num_train_epochs 2.0 \
+    --max_samples 10000000 \
+    --preprocessing_num_workers 16 \
+    --per_device_train_batch_size 4 \
+    --gradient_accumulation_steps 2 \
+    --lr_scheduler_type cosine \
+    --max_grad_norm 1.0 \
+    --logging_steps 5 \
+    --save_steps 250 \
+    --warmup_steps 300 \
+    --optim adamw_8bit \
+    --packing True \
+    --output_dir saves/Orca/SFT/ \
+    --overwrite_output_dir \
+    --save_total_limit 3 \
+    --load_best_model_at_end True \
+    --bf16 True \
+    --lora_rank 16 \
+    --lora_alpha 16 \
+    --lora_dropout 0 \
+    --lora_target q_proj,v_proj \
+    --val_size 0.02 \
+    --evaluation_strategy steps \
+    --eval_steps 250 \
+    --per_device_eval_batch_size 4 \
+    --load_best_model_at_end True \
+    --report_to wandb \
+    --plot_loss True 
+```
 
 ## Data
 ### Pretrain
@@ -146,7 +182,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --model_name_or_path saves/LLama8b/SFT \
     --finetuning_type full \
     --fp16 True \
-    --template  llama3_Math \
+    --template  WordProblemMath \
     --flash_attn True \
     --dataset_dir data \
     --dataset MathTest \
