@@ -70,7 +70,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --template WordProblemMath \
     --flash_attn True \
     --dataset_dir data \
-    --dataset WordProblem_SFT_LLama \
+    --dataset WordProblems_SFT \
     --cutoff_len 1024 \
     --learning_rate 5e-05 \
     --num_train_epochs 2.0 \
@@ -101,7 +101,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --load_best_model_at_end True \
     --plot_loss True 
 ```
-
+Tương tự với dataset WordProblem_SFT_LLama
 ## Accelerate Lora distributed 4 GPUs
 ```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3 accelerate launch \
