@@ -7,15 +7,11 @@ def GetEquationAndSymbol(Equation_to_Solve):
     Symbol = []
     symbol_appear = 0
     have_rational = False
-    is_system = False
     if any(relation in str(Equation) for relation in Relation):
-        # print("is system")
         have_rational = True
-        is_system = True
     if all(relation not in Equation_to_Solve for relation in Relation):
         # print("Relation not in Equation_to_Solve")
         for nums,expr in enumerate(Equation_to_Solve[1:]):
-            
             if len(str(expr)) == 1:
                 if str(expr).isdigit():
                     Equation = Eq(Equation, expr)
@@ -33,24 +29,47 @@ def GetEquationAndSymbol(Equation_to_Solve):
         # print("Relation in Equation_to_Solve")
         have_rational = True
         Equation = ' '.join([str(elem) for elem in Equation_to_Solve[:-1]]) 
-        # if something false check this
         Symbol = Equation_to_Solve[-1]
-    if is_system:
-        return Equation_to_Solve[:(symbol_appear+1)],Symbol, have_rational, is_system
-    return Equation, Symbol, have_rational, is_system
+    return Equation, Symbol, have_rational, 
 
-def Solve(Equation_to_Solve):
-    Equation, Symbol, have_rational, is_system = GetEquationAndSymbol(Equation_to_Solve)
-    if isinstance(Equation, sympy.Eq) and len(Symbol) > 1:
+def SystemLinearMoreThanTwo(Equation_to_Solve):
+    equation_list = []
+    symbol_list = []
+    for nums,expr in enumerate(Equation_to_Solve):
+        if isinstance(expr, sympy.Symbol):
+            if expr in symbol_list:
+                equation_list.append(expr)
+                symbol_appear +=1
+            else:
+                symbol_list.append(expr)
+                symbol_appear = nums
+        else:
+            equation_list.append(expr)
+    return solve(equation_list, symbol_list)
+
+def SolveLeastThan2Symbol(Equation_to_Solve):
+    Equation, Symbol, have_rational = GetEquationAndSymbol(Equation_to_Solve)
+    if isinstance(Equation, sympy.Eq):
         Equation = Equation.args
     if (Equation == '' or Equation == [] or Equation == None or Equation == False):
         return "No result found"
-    # print("Before Solve")
-    # print("Equation", Equation)
-    # print("Symbol", Symbol)
+    # print(Equation, Symbol, have_rational)
     if have_rational:
-        if is_system:
-            return solve(Equation, Symbol, domain=S.Reals,relational=True)
+        # print("use solve_univariate_inequality")
         return solve(Equation, Symbol, domain=S.Reals,relational=True)
     # print("use solve")
+    
     return solve(Equation, Symbol)
+def Count_comma(Equation_to_Solve):
+    count = 0
+    for i in str(Equation_to_Solve):
+        if str(i) == ',':
+            count += 1
+    return count
+def Solve(Equation_to_Solve):
+    Commas = Count_comma(Equation_to_Solve)
+    equation = ''.join([str(elem) for elem in Equation_to_Solve])
+    if Commas >=4 :
+        return SystemLinearMoreThanTwo(Equation_to_Solve)
+    else:
+        return SolveLeastThan2Symbol(Equation_to_Solve)
