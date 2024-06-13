@@ -28,23 +28,18 @@ def Result_From_Symbolic_Form(symbolic_Form):
     except Exception as e:
         return "Error: " + str(e)
 def preprocess_result_TypeAnd(result):
-    # Use regular expressions to find all variables/strings
     variables = re.findall(r'\b[a-zA-Z]+\b', result)
     
-    # Create a dictionary to store the mapping of variables/strings to their replacements
     mapping = {}
     replacements = ['x', 'y', 'z']
     
-    # Assign replacements to variables/strings based on the order of occurrence
     for variable in variables:
         if variable not in mapping:
             if len(mapping) < len(replacements):
                 mapping[variable] = replacements[len(mapping)]
             else:
-                # If there are more variables than replacements, use the last replacement
                 mapping[variable] = replacements[-1]
-    
-    # Use regular expressions to replace variables/strings with their corresponding replacements
+
     if not mapping:
         return result
     preprocessed_result = re.sub(r'\b(' + '|'.join(mapping.keys()) + r')\b', lambda m: mapping[m.group()], result)
@@ -55,6 +50,7 @@ def compare_result_TypeAnd(result1, result2):
 def compare_values_dict(dict1, dict2):
     array_dict1 = list(dict1.values())
     array_dict2 = list(dict2.values())
+
     array_dict1.sort()
     array_dict2.sort()
     return array_dict1 == array_dict2
@@ -72,7 +68,6 @@ def main(Predict_path, Test_path):
 
     df = pd.read_json(Predict_path, lines=True)
 
-    df['predict'] = df['predict'].apply(lambda x: re.sub(r'.*Problem:\s*', '', x))
     df['predict'] = df['predict'].apply(lambda x: x.split(']]')[0] + ']]')
     df['SymbolicForm'] = df['predict'].apply(find_symbolic_form)
     df['SymbolicAnswer'] = df['SymbolicForm'].apply(Result_From_Symbolic_Form)
@@ -80,17 +75,17 @@ def main(Predict_path, Test_path):
     question = pd.read_json(Test_path, lines=True)
 
     question['SymbolicAnswer'] = question['Symbolic Form'].apply(Result_From_Symbolic_Form)
-    question.head()
     
 
-    df.drop(columns=['label'], inplace=True)
     question.drop(columns=['Answer',"Source",], inplace=True)
     question.rename(columns={'SymbolicAnswer': 'Answer'}, inplace=True)
     result = pd.merge(df, question, left_index=True, right_index=True)
-    result['Math'] = result.apply(lambda x: compareResult(x['SymbolicAnswer'], x['Answer']), axis=1)
-    print(result['Math'].value_counts())
-    accuracy = result['Math'].value_counts()[0] / len(result)
+    result['Match'] = result.apply(lambda x: compareResult(x['SymbolicAnswer'], x['Answer']), axis=1)
+    print(result['Match'].value_counts())
+    accuracy = result['Match'].value_counts()[0] / len(result)
     print(f"Accuracy: {accuracy}")
+    print(result[result['Match'] == True]['Level'].sum())
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Evaluate prediction accuracy.')
