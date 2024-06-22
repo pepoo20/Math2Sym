@@ -489,5 +489,12 @@
     "columns": {
       "prompt": "Question"
     }
+  },
+  "WordProblem_Probability_Num": {
+    "hf_hub_url": "MathSymbol/Probability",
+    "columns": {
+      "prompt": "question",
+      "response": "answer"
+    }
   }
 }
