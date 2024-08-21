@@ -422,7 +422,7 @@
     }
   },
   "WordProblem_SFT_LLama": {
-    "hf_hub_url": "MathSymbol/Symbol_WordProblem_LLama",
+    "hf_hub_url": "MathSymbol/LLama_Decontamined",
     "columns": {
       "prompt": "question",
       "response": "answer"
