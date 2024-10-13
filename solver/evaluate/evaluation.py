@@ -2,7 +2,7 @@ import pandas as pd
 import re
 import sys
 import argparse
-from solver import extract_equation
+from ..solve_main import extract_equation
 import sympy
 
 
@@ -67,26 +67,20 @@ def main(Predict_path, Test_path):
     print("Test_path: ", Test_path)
 
     df = pd.read_json(Predict_path, lines=True)
-
-    df['predict'] = df['predict'].apply(lambda x: x.split(']]')[0] + ']]')
     df['SymbolicForm'] = df['predict'].apply(find_symbolic_form)
-    df['SymbolicAnswer'] = df['SymbolicForm'].apply(Result_From_Symbolic_Form)
+    df['PredictSymbolicAnswer'] = df['SymbolicForm'].apply(Result_From_Symbolic_Form)
 
     question = pd.read_json(Test_path, lines=True)
-
     question['SymbolicAnswer'] = question['Symbolic Form'].apply(Result_From_Symbolic_Form)
-    
-
-    question.drop(columns=['Answer',"Source",], inplace=True)
-    question.rename(columns={'SymbolicAnswer': 'Answer'}, inplace=True)
     result = pd.merge(df, question, left_index=True, right_index=True)
-    result['Match'] = result.apply(lambda x: compareResult(x['SymbolicAnswer'], x['Answer']), axis=1)
+
+    result['Match'] = result.apply(lambda x: compareResult(x['PredictSymbolicAnswer'], x['SymbolicAnswer']), axis=1)
+
     print(result['Match'].value_counts())
     accuracy = result['Match'].value_counts()[0] / len(result)
     print(f"Accuracy: {accuracy}")
-    print(result[result['Match'] == True]['Level'].sum())
-
-
+    print(result[result['Match'] == True]['Fixed'].sum())
+    
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Evaluate prediction accuracy.')
     parser.add_argument('Predict_path', type=str, help='Path to the prediction file')

@@ -1,0 +1,8 @@
+# git ignore all the pycache directories and files
+__pycache__/
+*.pyc
+
+*.ipynb
+
+# ignore file in the Dataset folder
+Dataset/*

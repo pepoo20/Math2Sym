@@ -28,7 +28,6 @@ class TestSolver(unittest.TestCase):
 
     def test_inequalitySystem(self):
         equation = "[[6*x + 5/7 < 4*x + 7, (8*x + 3)/2 < 2*x + 5, x, solve]]"
-        # Here you would calculate the expected result manually or with a known good method
         list_of_equations = ['6*x + 5/7 < 4*x + 7', '(8*x + 3)/2 < 2*x + 5']
         expected = solve(list_of_equations, x)
         self.assertEqual(expected, extract_equation(equation))
@@ -38,7 +37,6 @@ class TestSolver(unittest.TestCase):
     #     expected = simplify("cos(10*x) + 2*cos(4*x)**2 + 6*cos(3*x)*cos(x) - cos(x) - 8*cos(x)*cos(3*x)**3")
     #     self.assertEqual(expected, extract_equation(equation))
 
-# Add more tests as needed for other equations
 
 if __name__ == '__main__':
     unittest.main()

@@ -90,9 +90,3 @@ Symbolic Form: [[3, 5, ilcm]]
 
 Word Problem:
 """
-
-temp = """
-Word Problem: The Line A bus arrives at the bus stop every 25 minutes, and the Line B bus arrives every 15 minutes. They are both at the bus stop right now. In how many minutes will they both be at the bus stop again ?
-Find the least common multiple of 25 and 15.
-Symbolic Form: [[25, 15, ilcm]]
-"""

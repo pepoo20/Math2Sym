@@ -118,6 +118,7 @@ Symbolic Form: [[1.75 + 0.65*x, <=, 10, x, solve]]
 
 Word Problem:
 """
+
 atleast = Math_Teacher_Prompt+"""
 Task : Create a new word problem and transform it to an inequality and Symbolic Form.Try to be creative as possible and use ONLY one variable in the word problem.
 You will get rewarded for reasonable and variety of the word problem.
@@ -303,6 +304,7 @@ Break down the word problem into smaller information:\newline 1. Our goal is to 
 
 Word Problem:
 """
+
 First_Compound = """
 Word Problem:A company manufactures and sells custom furniture. The cost to produce each piece of furniture is between $120 and $150, inclusive. The company has a minimum production requirement of 30 pieces but cannot produce more than 50 pieces for a particular order due to resource constraints. Write a compound inequality representing the possible total cost for the company from this order.
 Break down the word problem into smaller information:
@@ -349,8 +351,7 @@ Combining the inequalities: Hourly rate * Number of hours + Fixed project setup 
 Symbolic Form: [[50*15 + 200 <= x, x <= 75*25 + 200, x, solve]]
 """
 
-
-Second_Temp = """
+Second_Compound = """
 
 Word Problem:A software company is planning a marketing campaign and will distribute promotional USB drives. The cost of producing each USB drive is $3, and the company plans to give away between 100 and 500 USB drives. Additionally, there is a setup fee of $150 for the production. The company's budget for the campaign is between $600 and $1800. What is the possible range of the number of USB drives the company can produce while meeting both the cost constraints and the distribution limits?
 Break down the word problem into smaller information:
@@ -423,7 +424,7 @@ Symbolic Form: [[2200 <= 8*x + 300, 8*x + 300 <= 6500, 200 <= x, x <= 800, x, so
 
 """
 
-Third = """
+Third_Compound = """
 Word Problem:Tom has been saving money for a new bike and has a budget of $240 to $320. He wants to buy a bike that costs 15% to 25% more than his budget for accessories and maintenance. If he receives a $20 discount coupon for the bike, how much can he expect to spend on the bike after the discount?
 Break down the word problem into smaller information:
 1. Our goal is to find the possible range of prices Tom can expect to spend on the bike after the discount.

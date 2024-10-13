@@ -14,6 +14,7 @@ pip install -q galore-torch wandb tiktoken datasets==2.17.1 flash-attn
 ```
 
 ## Reproduce
+
 ### Pretrain
 ```bash
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
@@ -22,7 +23,6 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct \
     --finetuning_type lora \
     --template empty \
-    --flash_attn True \
     --dataset_dir data \
     --dataset Pretrain_Basic \
     --cutoff_len 1024 \
@@ -40,9 +40,8 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --warmup_steps 500 \
     --optim adamw_8bit \
     --packing True \
-    --report_to wandb \
     --overwrite_output_dir \
-    --output_dir saves/LLaMA3-8B-Chat/lora/ \
+    --output_dir saves/LLama_Symbol_pretrain/ \
     --bf16 True \
     --lora_rank 16 \
     --lora_alpha 16 \
@@ -55,10 +54,6 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --load_best_model_at_end True \
     --plot_loss True 
 ```
-Merge Lora with model
-```bash
-python src/merge_peft.py --base_model=meta-llama/Llama-2-7b-hf --peft_model=save/qlora-out --output_dir=qlora-merge
-```
 
 ### SFT
 ```bash
@@ -68,7 +63,6 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct \
     --finetuning_type lora \
     --template WordProblemMath \
-    --flash_attn True \
     --dataset_dir data \
     --dataset WordProblems_SFT \
     --cutoff_len 1024 \
@@ -86,9 +80,8 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --warmup_steps 500 \
     --optim adamw_8bit \
     --packing True \
-    --report_to wandb \
     --overwrite_output_dir \
-    --output_dir saves/LLaMA3-8B-Chat/lora_template/ \
+    --output_dir saves/LLama3.1_Symbol_SFT/ \
     --bf16 True \
     --lora_rank 16 \
     --lora_alpha 16 \
@@ -101,51 +94,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --load_best_model_at_end True \
     --plot_loss True 
 ```
-Tương tự với dataset WordProblem_SFT_LLama
-## Accelerate Lora distributed 4 GPUs
-```bash
-CUDA_VISIBLE_DEVICES=0,1,2,3 accelerate launch \
-    --config_file examples/accelerate/single_config.yaml \
-    -- src/train_bash.py \
-    --stage sft \
-    --do_train \
-    --ddp_timeout 180000000 \
-    --model_name_or_path saves/Orca/merge_unload \
-    --finetuning_type lora \
-    --flash_attn True \
-    --dataset WordProblems_SFT \
-    --dataset_dir data \
-    --template WordProblemMath \
-    --learning_rate 5e-05 \
-    --num_train_epochs 2.0 \
-    --max_samples 10000000 \
-    --preprocessing_num_workers 16 \
-    --per_device_train_batch_size 4 \
-    --gradient_accumulation_steps 2 \
-    --lr_scheduler_type cosine \
-    --max_grad_norm 1.0 \
-    --logging_steps 5 \
-    --save_steps 250 \
-    --warmup_steps 300 \
-    --optim adamw_8bit \
-    --packing True \
-    --output_dir saves/Orca/SFT/ \
-    --overwrite_output_dir \
-    --save_total_limit 3 \
-    --load_best_model_at_end True \
-    --bf16 True \
-    --lora_rank 16 \
-    --lora_alpha 16 \
-    --lora_dropout 0 \
-    --lora_target q_proj,v_proj \
-    --val_size 0.02 \
-    --evaluation_strategy steps \
-    --eval_steps 250 \
-    --per_device_eval_batch_size 4 \
-    --load_best_model_at_end True \
-    --report_to wandb \
-    --plot_loss True 
-```
+
 
 ## Data
 ### Pretrain
@@ -160,18 +109,26 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 accelerate launch \
 | ------- | ---- | ----------- | ---- |
 | WordProblems_SFT | 150K | Math word problems | [Download](https://huggingface.co/datasets/MathSymbol/Symbol_WordProblem)
 
+
+
 ## Benchmark
 
-| Model                                                    | Trained                  | Zero shot    | 5 shot example  |
-| -------------------------------------------------------- | --------------------------- | ----------------- | --------- |
-| [Qwen1.5-0.5B](https://huggingface.co/baichuan-inc)         | 73/92                      |             |  |
-| [Qwen1.5-1.8B](https://huggingface.co/bigscience)               | 61/92 |    | -         |
-| [Gemma-2B](https://huggingface.co/bigscience)              | 55/92 |    | -         |
-| [Llama3-8b](https://huggingface.co/THUDM)                 |                           |    |   |
-| [Gemma-7b](https://huggingface.co/CohereForAI)          |                     | 0.29     | 0.15    |
-| [Mistral-7b](https://huggingface.co/deepseek-ai)     |                   | 0.3     | 0.5  |
-| [Mistral-8x7b](https://huggingface.co/tiiuae)                  |                  | 0.6   | 0.62    |
-| [Gpt-3.5](https://huggingface.co/google)         |    |   0.75     | 0.87  
+| Model                                                     | Zero-shot-CoT | Few Shot PaL | Few Shot + Solver | Fine-tuned basic | Fine-tuned advanced |
+| --------------------------------------------------------- | ------------- | ------------- | ----------------- | ----------------- | -------------------- |
+| [Mistral 7B](https://huggingface.co/deepseek-ai)           | 69            | 113           | 155               | 183               | **210**              |
+| [Mistral 8x7B](https://huggingface.co/tiiuae)              | 135           | 145           | 154               | Nan               | Nan                  |
+| [Orca 7B](https://huggingface.co/microsoft)                | 25            | 78            | 76                | 133               | **171**              |
+| [Qwen 7B](https://huggingface.co/qwen-ai)                  | 116           | 126           | 139               | 170               | **207**              |
+| [WizardMath 7B](https://huggingface.co/wizardmath)         | 133           | 135           | 140               | 183               | **217**              |
+| [Llama3.1 8B](https://huggingface.co/facebook/llama)       | 156           | 140           | 168               | 197               | **211**              |
+| [Qwen 0.5B](https://huggingface.co/qwen-ai)                | 15            | 22            | 7                 | **168**           | 132                  |
+| [Qwen 1.8B](https://huggingface.co/qwen-ai)                | 24            | 76            | 52                | **153**           | 136                  |
+| [Gemma 2B](https://huggingface.co/gemma-ai)                | 10            | 20            | 39                | 133               | **135**              |
+| GPT-neo 350M | 0             | 70            | 36                | **130**           | 120                  |
+| [GPT 3.5](https://huggingface.co/openai/gpt-3.5-turbo)     | 172           | 171           | **179**           | Nan               | Nan                  |
+| [gpt-4o mini](https://huggingface.co/openai/gpt-4)         | **217**       | 182           | 182               | Nan               | Nan                  |
+
+_Max score: 231_
 
 ## Evaluation
 
@@ -183,7 +140,6 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --finetuning_type full \
     --fp16 True \
     --template  WordProblemMath \
-    --flash_attn True \
     --dataset_dir data \
     --dataset MathTest \
     --cutoff_len 1024 \
@@ -199,9 +155,10 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
 
 ### Evaluate
 ```bash
-python src/evaluation.py evals/LLama3-8b/generated_predictions.jsonl  data/Math_test.jsonl
-```
+python -m solver.evaluate.evaluation solver/evaluate/data/Wizard.jsonl solver/evaluate/data/test.jsonl
 
+```
+<!-- 
 ## Requirement
 
 | Mandatory    | Minimum | Recommend |
@@ -219,5 +176,5 @@ python src/evaluation.py evals/LLama3-8b/generated_predictions.jsonl  data/Math_
 | CUDA         | 11.6    | 12.2      |
 | deepspeed    | 0.10.0  | 0.14.0    |
 | bitsandbytes | 0.39.0  | 0.43.0    |
-| flash-attn   | 2.3.0   | 2.5.6     |
+| flash-attn   | 2.3.0   | 2.5.6     | -->
 

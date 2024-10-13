@@ -8,6 +8,7 @@ You must followed these principles:
 5. DO NOT use the symbol //,$ and word in the expression.
 6. Symbolic Form has form of [[expression, symbol, expression, variable, solve]].
 """
+
 Word_Problem_Seed =Math_Teacher_Prompt+ """
 Your output should be in the following format:
 Word Problem: <Your created word problem>
