@@ -16,6 +16,7 @@ pip install -q .
 
 ### Pretrain
 ```bash
+%cd LLama_Factory
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --stage pt \
     --do_train True \
@@ -56,6 +57,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
 
 ### SFT
 ```bash
+%cd LLama_Factory
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --stage sft \
     --do_train True \
@@ -63,7 +65,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --finetuning_type lora \
     --template WordProblemMath \
     --dataset_dir data \
-    --dataset WordProblems_SFT \
+    --dataset Basic_SFT \
     --cutoff_len 1024 \
     --learning_rate 5e-05 \
     --num_train_epochs 2.0 \
@@ -93,8 +95,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --load_best_model_at_end True \
     --plot_loss True 
 ```
-
-
+For Advance dataset, change the dataset_dir to Advance_SFT
 ## Data
 
 | Dataset | Size | Link |

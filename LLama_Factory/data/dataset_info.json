@@ -414,26 +414,6 @@
     },
     "folder": "python"
   },
-  "WordProblems_SFT": {
-    "hf_hub_url": "MathSymbol/Symbol_WordProblem",
-    "columns": {
-      "prompt": "question",
-      "response": "answer"
-    }
-  },
-  "WordProblem_SFT_LLama": {
-    "hf_hub_url": "MathSymbol/LLama_Decontamined",
-    "columns": {
-      "prompt": "question",
-      "response": "answer"
-    }
-  },
-  "WordProblems_Pretrain": {
-    "hf_hub_url": "MathSymbol/Symbol_WordProblem",
-    "columns": {
-      "prompt": "response"
-    }
-  },
   "MathTest": {
     "file_name": "Math_test.jsonl",
     "columns": {
@@ -441,57 +421,23 @@
     }
   },
   "Pretrain_Basic": {
-    "hf_hub_url": "MathSymbol/SymbolBasic_1M_v1",
+    "hf_hub_url": "MathSymbol/EMSF",
+    "subset": "pretrain",
     "columns": {
       "prompt": "response"
     }
   },
-  "BasicSFT": {
-    "hf_hub_url": "MathSymbol/SymbolBasic_1M_v1",
+  "Basic_SFT": {
+    "hf_hub_url": "MathSymbol/EMSF",
+    "subset": "basic",
     "columns": {
-      "prompt": "Question",
-      "response": "Answer"
+      "prompt": "question",
+      "response": "answer"
     }
   },
-  "BasicSFT_500kTo1M": {
-    "hf_hub_url": "MathSymbol/SymbolBasic_500kTo1M",
-    "columns": {
-      "prompt": "Question",
-      "response": "Answer"
-    }
-  },
-  "GCD_test": {
-    "file_name": "Greatest_Common_Divisor.jsonl",
-    "columns": {
-      "prompt": "Question"
-    }
-  },
-  "LCM_test": {
-    "file_name": "Least_Common_Multiple.jsonl",
-    "columns": {
-      "prompt": "Question"
-    }
-  },
-  "Inequalities_test": {
-    "file_name": "Inequalities_Equation.jsonl",
-    "columns": {
-      "prompt": "Question"
-    }
-  },
-  "CompoundInequalities_test": {
-    "file_name": "Compound_Inequalities.jsonl",
-    "columns": {
-      "prompt": "Question"
-    }
-  },
-  "SystemLinearEquation_test": {
-    "file_name": "Systems_of_Linear_Equations.jsonl",
-    "columns": {
-      "prompt": "Question"
-    }
-  },
-  "WordProblem_Probability_Num": {
-    "hf_hub_url": "MathSymbol/Probability",
+  "Advance_SFT": {
+    "hf_hub_url": "MathSymbol/EMSF",
+    "subset": "advanced",
     "columns": {
       "prompt": "question",
       "response": "answer"
