@@ -10,7 +10,6 @@ git clone https://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@github.com/pepoo20/Sy
 cd Symbol-Math
 ls
 pip install -q .
-pip install -q galore-torch wandb tiktoken datasets==2.17.1 flash-attn
 ```
 
 ## Reproduce
@@ -97,17 +96,12 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
 
 
 ## Data
-### Pretrain
 
-| Dataset | Size | Description | Link |
-| ------- | ---- | ----------- | ---- |
-| Pretrain_Basic | 1M | Basic text data | [Download](https://huggingface.co/datasets/MathSymbol/SymbolBasic_1M_v1)
-
-### SFT
-
-| Dataset | Size | Description | Link |
-| ------- | ---- | ----------- | ---- |
-| WordProblems_SFT | 150K | Math word problems | [Download](https://huggingface.co/datasets/MathSymbol/Symbol_WordProblem)
+| Dataset | Size | Link |
+| ------- | ---- | ---- |
+| Pretrain_Basic | >1M  | [Download](https://huggingface.co/datasets/MathSymbol/EMSF)
+| WordProblems_SFT | 150K | [Download](https://huggingface.co/datasets/MathSymbol/EMSF)
+| Advance | 79K | [Download](https://huggingface.co/datasets/MathSymbol/EMSF) |
 
 
 
@@ -149,7 +143,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --max_new_tokens 512 \
     --top_p 0.7 \
     --temperature 0.2 \
-    --output_dir evals/LLama3-8b/ \
+    --output_dir solver/evaluate/data/ \
     --do_predict True
 ```
 
