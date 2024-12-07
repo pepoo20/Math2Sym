@@ -26,7 +26,8 @@ pip install -q -r requirements.txt
 
 ### Pretraining
 bash
-```%cd LLama_Factory
+```
+cd LLama_Factory
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --stage pt \
     --do_train True \
@@ -62,12 +63,13 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --eval_steps 1000 \
     --per_device_eval_batch_size 2 \
     --load_best_model_at_end True \
+    --report_to none \
     --plot_loss True 
 ```
 
 ### Fine-tuning
 ```bash
-%cd LLama_Factory
+cd LLama_Factory
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --stage sft \
     --do_train True \
@@ -103,6 +105,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --eval_steps 250 \
     --per_device_eval_batch_size 2 \
     --load_best_model_at_end True \
+    --report_to none \
     --plot_loss True 
 ```
 
