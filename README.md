@@ -133,6 +133,7 @@ _Max score: 231_
 
 ### Inference
 ```bash
+cd LLama_Factory
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --stage sft \
     --model_name_or_path saves/LLama8b/SFT \
