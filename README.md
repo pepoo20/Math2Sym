@@ -1,22 +1,32 @@
+# Math2Sym: A System for Solving Elementary Problems via Large Language Models and Symbolic Solvers
+
+This repository contains the official implementation of the paper "Math2Sym: A System for Solving Elementary Problems via Large Language Models and Symbolic Solvers".
+
+## Overview
+
+Math2Sym is a novel system that combines Large Language Models (LLMs) with symbolic solvers to tackle elementary mathematical problems. Our approach achieves state-of-the-art performance across various mathematical problem-solving benchmarks.
+
 ## Table of Contents
 
-- [Install](#install)
-- [Benchmark](#benchmark)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Experiments](#experiments)
 - [Data](#data)
+- [Citation](#citation)
 
-## Install
+## Installation
+
 ```bash
-git clone https://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@github.com/pepoo20/Symbol-Math.git
-cd Symbol-Math
-ls
-pip install -q .
+git clone https://github.com/pepoo20/Math2Sym.git
+cd Math2Sym
+pip install -q -r requirements.txt
 ```
 
-## Reproduce
+## Usage
 
-### Pretrain
-```bash
-%cd LLama_Factory
+### Pretraining
+bash
+```%cd LLama_Factory
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --stage pt \
     --do_train True \
@@ -55,7 +65,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --plot_loss True 
 ```
 
-### SFT
+### Fine-tuning
 ```bash
 %cd LLama_Factory
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
@@ -95,15 +105,6 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --load_best_model_at_end True \
     --plot_loss True 
 ```
-For Advance dataset, change the dataset_dir to Advance_SFT
-## Data
-
-| Dataset | Size | Link |
-| ------- | ---- | ---- |
-| Pretrain_Basic | >1M  | [Download](https://huggingface.co/datasets/MathSymbol/EMSF)
-| WordProblems_SFT | 150K | [Download](https://huggingface.co/datasets/MathSymbol/EMSF)
-| Advance | 79K | [Download](https://huggingface.co/datasets/MathSymbol/EMSF) |
-
 
 
 ## Benchmark
@@ -127,7 +128,7 @@ _Max score: 231_
 
 ## Evaluation
 
-### Predict
+### Inference
 ```bash
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --stage sft \
@@ -148,28 +149,37 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --do_predict True
 ```
 
-### Evaluate
+### Evaluation
 ```bash
 python -m solver.evaluate.evaluation solver/evaluate/data/Wizard.jsonl solver/evaluate/data/test.jsonl
 
 ```
-<!-- 
-## Requirement
 
-| Mandatory    | Minimum | Recommend |
-| ------------ | ------- | --------- |
-| python       | 3.8     | 3.10      |
-| torch        | 1.13.1  | 2.2.0     |
-| transformers | 4.37.2  | 4.39.3    |
-| datasets     | 2.14.3  | 2.18.0    |
-| accelerate   | 0.27.2  | 0.28.0    |
-| peft         | 0.9.0   | 0.10.0    |
-| trl          | 0.8.1   | 0.8.1     |
+## Data
 
-| Optional     | Minimum | Recommend |
-| ------------ | ------- | --------- |
-| CUDA         | 11.6    | 12.2      |
-| deepspeed    | 0.10.0  | 0.14.0    |
-| bitsandbytes | 0.39.0  | 0.43.0    |
-| flash-attn   | 2.3.0   | 2.5.6     | -->
+We provide access to our training and evaluation datasets:
 
+| Dataset | Size | Description | Link |
+| ------- | ---- | ----------- | ---- |
+| Pretrain_Basic | >1M | Pretraining dataset | [Download](https://huggingface.co/datasets/MathSymbol/EMSF) |
+| WordProblems_SFT | 150K | Fine-tuning dataset | [Download](https://huggingface.co/datasets/MathSymbol/EMSF) |
+| Advance | 79K | Advanced problems dataset | [Download](https://huggingface.co/datasets/MathSymbol/EMSF) |
+
+## Citation
+
+If you find this work useful, please cite our paper:
+
+```bibtex
+@inproceedings{
+    nguyen2024mathsym,
+    title={Math2Sym: A System for Solving Elementary Problems via Large Language Models and Symbolic Solvers},
+    author={Minh Phu Nguyen and Minh Phuong Pham and Man Ngo and Kha Tuan Minh},
+    booktitle={The 4th Workshop on Mathematical Reasoning and AI at NeurIPS'24},
+    year={2024},
+    url={https://openreview.net/forum?id=eQrkAPcGRF}
+}
+```
+
+## License
+
+<!-- [Add your license information here] -->

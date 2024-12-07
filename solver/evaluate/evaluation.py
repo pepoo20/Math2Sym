@@ -63,23 +63,36 @@ def compareResult(result1, result2):
         return result1 == result2
 
 def main(Predict_path, Test_path):
-    print("Predict_path: ", Predict_path)
-    print("Test_path: ", Test_path)
+    # Print input paths
+    print(f"\nEvaluating predictions from: {Predict_path}")
+    print(f"Against test data from: {Test_path}\n")
 
-    df = pd.read_json(Predict_path, lines=True)
-    df['SymbolicForm'] = df['predict'].apply(find_symbolic_form)
-    df['PredictSymbolicAnswer'] = df['SymbolicForm'].apply(Result_From_Symbolic_Form)
+    # Load and process prediction data
+    predictions_df = pd.read_json(Predict_path, lines=True)
+    predictions_df['SymbolicForm'] = predictions_df['predict'].apply(find_symbolic_form)
+    predictions_df['PredictSymbolicAnswer'] = predictions_df['SymbolicForm'].apply(Result_From_Symbolic_Form)
 
-    question = pd.read_json(Test_path, lines=True)
-    question['SymbolicAnswer'] = question['Symbolic Form'].apply(Result_From_Symbolic_Form)
-    result = pd.merge(df, question, left_index=True, right_index=True)
+    # Load and process test data
+    test_df = pd.read_json(Test_path, lines=True)
+    test_df['SymbolicAnswer'] = test_df['Symbolic Form'].apply(Result_From_Symbolic_Form)
 
+    # Merge and compare results
+    result = pd.merge(predictions_df, test_df, left_index=True, right_index=True)
     result['Match'] = result.apply(lambda x: compareResult(x['PredictSymbolicAnswer'], x['SymbolicAnswer']), axis=1)
 
-    print(result['Match'].value_counts())
-    accuracy = result['Match'].value_counts()[0] / len(result)
-    print(f"Accuracy: {accuracy}")
-    print(result[result['Match'] == True]['Fixed'].sum())
+    # Calculate and display metrics
+    total_questions = len(result)
+    correct_answers = result['Match'].sum()
+    accuracy = correct_answers / total_questions
+    fixed_score = result[result['Match'] == True]['Fixed'].sum()
+
+    print("Results:")
+    print("-" * 50)
+    print(f"Total Questions: {total_questions}")
+    print(f"Correct Answers: {correct_answers}")
+    print(f"Accuracy: {accuracy:.2%}")
+    print(f"Score: {fixed_score}")
+    print("-" * 50)
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Evaluate prediction accuracy.')

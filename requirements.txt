@@ -1,17 +1,16 @@
-torch>=1.13.1
+--find-links https://download.pytorch.org/whl/torch_stable.html
+torch==1.13.1+cpu
+sentencepiece
 transformers>=4.37.2
 datasets==2.17.1
 accelerate>=0.27.2
 wandb
-flash-attn
-galore-torch
 tiktoken
 peft>=0.10.0
 trl>=0.8.1
 gradio>=4.0.0
 scipy
 einops
-sentencepiece
 protobuf
 uvicorn
 pydantic
@@ -19,3 +18,6 @@ fastapi
 sse-starlette
 matplotlib
 fire
+sympy
+stopit
+pandas

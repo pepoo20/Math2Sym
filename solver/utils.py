@@ -13,7 +13,6 @@ def Operation(Equation_to_Solve, operator):
         return x / y
     
 def my_igcd(Equation_to_Solve):
-    print("Equation to Solve: ", Equation_to_Solve)
     try :
         return sympy.igcd(*Equation_to_Solve)
     except ValueError:
